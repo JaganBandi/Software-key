@@ -1,0 +1,48 @@
+# -------------------------------
+# Base Image
+# -------------------------------
+FROM almalinux:9
+
+# -------------------------------
+# Install Required Packages
+# -------------------------------
+RUN dnf update -y && \
+    dnf install -y \
+        sudo \
+        vim \
+        wget \
+        tar \
+        make \
+        unzip \
+        git \
+        fontconfig \
+        java-21-openjdk-devel \
+    && dnf clean all
+
+# -------------------------------
+# Add Jenkins Repository
+# -------------------------------
+RUN wget -O /etc/yum.repos.d/jenkins.repo \
+    https://pkg.jenkins.io/rpm-stable/jenkins.repo && \
+    rpm --import https://pkg.jenkins.io/rpm-stable/jenkins.io-2023.key
+
+# -------------------------------
+# Install Jenkins
+# -------------------------------
+RUN dnf install -y jenkins && \
+    dnf clean all
+
+# -------------------------------
+# Expose Jenkins Port
+# -------------------------------
+EXPOSE 8080
+
+# -------------------------------
+# Set Jenkins Home
+# -------------------------------
+ENV JENKINS_HOME=/var/lib/jenkins
+
+# -------------------------------
+# Start Jenkins (Without systemctl)
+# -------------------------------
+CMD ["/usr/bin/java", "-jar", "/usr/share/java/jenkins.war"]

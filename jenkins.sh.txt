@@ -1,10 +1,7 @@
-sudo yum upgrade -y
-sudo yum install wget tar make unzip git -y
-sudo yum install fontconfig java-21-openjdk-devel -y
 sudo wget -O /etc/yum.repos.d/jenkins.repo \
     https://pkg.jenkins.io/rpm-stable/jenkins.repo
+sudo yum upgrade -y
+# Add required dependencies for the jenkins package
+sudo yum install fontconfig java-21-openjdk -y
 sudo yum install jenkins -y
-sudo systemctl start jenkins --no-page
-sudo systemctl status jenkins --no-page
-sudo firewall-cmd --permanent --add-port=8080/tcp
-sudo firewall-cmd --reload
+sudo systemctl daemon-reload	
