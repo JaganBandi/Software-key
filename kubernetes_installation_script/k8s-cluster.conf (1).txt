@@ -1,0 +1,13 @@
+# ============================================================
+# Kubernetes Cluster Configuration
+# Generated: Saturday 15 August 2026 08:03:50 AM IST
+# ============================================================
+
+CONTROL_PLANE_COUNT="1"
+WORKER_COUNT="2"
+CONTROL_PLANE_1_IP="192.168.254.147"
+CONTROL_PLANE_1_HOST="k8s-controller"
+WORKER_1_IP="192.168.254.155"
+WORKER_1_HOST="k8s-node1"
+WORKER_2_IP="192.168.254.156"
+WORKER_2_HOST="k8s-node2"
